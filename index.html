@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h2 {
+      color: #ff2e2e;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px red;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 12px;
+      width: 350px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    input, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      background: #2b2b2b;
+      color: white;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      box-shadow: 0 0 5px red;
+    }
+
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: darkred;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px red;
+    }
+
+    #msg {
+      margin-top: 15px;
+      color: lightgreen;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>🚔 Crime Reporting System</h2>
+
+<form id="crimeForm">
+  <input type="text" name="name" placeholder="Your Name"><br>
+  <select name="crime">
+  <option value="">Select Crime Type</option>
+  <option value="Theft">Theft</option>
+  <option value="Robbery">Robbery</option>
+  <option value="Assault">Assault</option>
+  <option value="Cyber Crime">Cyber Crime</option>
+  <option value="Fraud">Fraud</option>
+  <option value="Harassment">Harassment</option>
+  <option value="Vandalism">Vandalism</option>
+  <option value="Other">Other</option>
+</select><br><br>
+  <input type="text" name="location" placeholder="Location"><br>
+  
+  <textarea name="description" placeholder="Describe the incident..."></textarea><br>
+  
+  <button type="button" onclick="submitForm()">Submit Report</button>
+</form>
+
+<p id="msg"></p>
+<script>
+function submitForm() {
+  var form = document.forms["crimeForm"];
+
+  var formData = {
+    name: form["name"].value,
+    crime: form["crime"].value,
+    location: form["location"].value,
+    description: form["description"].value
+  };
+
+  google.script.run
+    .withSuccessHandler(function(response) {
+      document.body.innerHTML = `
+        <h2>🚔 Thank You!</h2>
+        <p>We will look into your report.</p>
+      `;
+    })
+    .submitCrime(formData);
+}
+</script>
+</body>
+</html>
