@@ -8,6 +8,8 @@ A fast, cloud-powered crime reporting system built on Google Sheets and Apps Scr
 
 
 Procedure:
+
+
 Step 1: Create a Google Sheet with columns for crime details
 
 
